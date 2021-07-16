@@ -2,8 +2,14 @@ const express = require('express')
 const app = express();
 const port = 8080;
 
+app.set('view engine', 'hbs');
+
 // Servir contenido estático
 app.use(express.static('public') );
+
+app.get('/', (req, res) => {
+    res.render( 'home' );
+});
 
 app.get('/inicio', (req, res) => {
     res.sendFile(__dirname + '/public/views/index.html')
