@@ -1,19 +1,18 @@
+const express = require('express')
+const app = express();
+const port = 8080;
 
-    const http = require('http');
+// Servir contenido estático
+app.use(express.static('public') );
 
-    http.createServer( (request, response) => { 
-        
-        // request => Lo que se solicita desde cualquier cliente (mobiles, celular, pc)
-        // response => Lo que retornará mi servidor al cliente
+app.get('/hola-mundo', (req, res) => {
+    res.send('Hola mundo desde la ruta correcta')
+});
 
-        response.setHeader('Content-Disposition', 'attachment; filename=test_file.csv')
-        response.writeHead(200, { 'Content-Type': 'application/csv' });
-
-        response.write('id, nombre\n');
-        response.write('1, Fernando\n');
-        response.write('2, Juan\n');
-        response.write('3, Pedro\n');
-        response.write('4, Manuel\n');
-        response.end(); // Con .end() decimos a Node que ya terminamos nuestros procesos y no debe haber más flujo
-    })
-    .listen( 8080 );
+app.get('*', (req, res) => {
+    res.sendFile(__dirname + '/public/404.html')
+});
+ 
+app.listen( port, () => {
+    console.log(`Página escuchándose en http://localhost:${ port }`);
+});
