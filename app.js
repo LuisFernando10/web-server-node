@@ -12,7 +12,7 @@ hbs.registerPartials( __dirname + '/views/partials/');
 // Servir contenido estático
 app.use(express.static('public') );
 
-app.get('/', (req, res) => {
+/*app.get('/', (req, res) => {
     res.render( 'home', {
         nombre: 'Luis Fernando',
         titulo: 'Curso Node.js'
@@ -31,10 +31,10 @@ app.get('/elementos/', (req, res) => {
         nombre: 'Luis Fernando',
         titulo: 'Curso Node.js'
     });
-});
+});*/
 
 app.get('*', (req, res) => {
-    res.render( '404' );
+    res.sendFile( __dirname + '/public/index.html' );
 });
  
 app.listen( port, () => {
